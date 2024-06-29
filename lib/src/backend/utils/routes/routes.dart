@@ -3,6 +3,7 @@ import 'package:odoohackathon24/src/backend/utils/navi_anim/page_transition.dart
 import 'package:odoohackathon24/src/backend/utils/routes/route_const.dart';
 import 'package:odoohackathon24/src/frontend/screens/getstarted/onboarding_screen.dart';
 import 'package:odoohackathon24/src/frontend/screens/home_pages/create_event_page.dart';
+import 'package:odoohackathon24/src/frontend/screens/home_pages/detailed_event_page.dart';
 import 'package:odoohackathon24/src/frontend/screens/login/login_screen.dart';
 import 'package:odoohackathon24/src/frontend/screens/main_home/main_home.dart';
 import 'package:odoohackathon24/src/frontend/screens/signup/signup_screen.dart';

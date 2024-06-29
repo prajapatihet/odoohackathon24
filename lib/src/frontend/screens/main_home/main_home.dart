@@ -5,6 +5,8 @@ import 'package:odoohackathon24/src/backend/auth.dart';
 import 'package:odoohackathon24/src/backend/database.dart';
 import 'package:odoohackathon24/src/backend/saved_data.dart';
 import 'package:odoohackathon24/src/backend/utils/routes/route_const.dart';
+import 'package:odoohackathon24/src/frontend/common/event_container.dart';
+import 'package:odoohackathon24/src/frontend/screens/home_pages/detailed_event_page.dart';
 
 class MainHome extends StatefulWidget {
   const MainHome({super.key});
@@ -19,7 +21,7 @@ class _MainHomeState extends State<MainHome> {
 
   @override
   void initState() {
-    userName = SavedData.getUserName();
+    userName = SavedData.getUserName().split(" ")[0];
     refresh();
     super.initState();
   }
@@ -57,38 +59,35 @@ class _MainHomeState extends State<MainHome> {
         body: CustomScrollView(
           slivers: [
             SliverToBoxAdapter(
-              child: Text(
-                "Hello $userName!!",
-                style: GoogleFonts.montserrat(
-                  fontSize: 24,
-                  color: Colors.white,
-                  fontWeight: FontWeight.w400,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Hello $userName!!",
+                      style: GoogleFonts.montserrat(
+                        fontSize: 28,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    Text(
+                      "Exlpore event around you",
+                      style: GoogleFonts.montserrat(
+                        fontSize: 18,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
             SliverList(
               delegate: SliverChildBuilderDelegate(
-                (context, index) => ListTile(
-                  leading: Text(
-                    "${index + 1}",
-                    style: GoogleFonts.montserrat(
-                      color: Colors.white,
-                      fontSize: 20,
-                    ),
-                  ),
-                  title: Text(
-                    events[index].data['name'],
-                    style: GoogleFonts.montserrat(
-                      fontSize: 20,
-                      color: Colors.white,
-                    ),
-                  ),
-                  subtitle: Text(
-                    events[index].data['location'],
-                    style: GoogleFonts.montserrat(
-                      color: Colors.white,
-                    ),
-                  ),
+                (context, index) => EventContainer(
+                  data: events[index],
                 ),
                 childCount: events.length,
               ),
@@ -100,7 +99,7 @@ class _MainHomeState extends State<MainHome> {
             await Navigator.pushNamed(context, RouteConstant.createEvent);
             refresh();
           },
-          backgroundColor: Color(0xff7f00ff),
+          backgroundColor: const Color(0xff7f00ff),
           child: const Icon(
             Icons.add,
             color: Colors.white,

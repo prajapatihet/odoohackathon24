@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:odoohackathon24/src/backend/checkSessions.dart';
@@ -6,6 +8,7 @@ import 'package:odoohackathon24/src/backend/utils/routes/routes.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  HttpOverrides.global = MyHttpOverrides();
   await SavedData.init();
   runApp(const MyApp());
 }
@@ -24,5 +27,14 @@ class MyApp extends StatelessWidget {
       ).copyWith(textTheme: GoogleFonts.interTextTheme()),
       home: const Checksessions(),
     );
+  }
+}
+
+class MyHttpOverrides extends HttpOverrides {
+  @override
+  HttpClient createHttpClient(SecurityContext? context) {
+    return super.createHttpClient(context)
+      ..badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
   }
 }

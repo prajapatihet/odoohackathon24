@@ -91,3 +91,20 @@ Future getAllEvents() async {
     print(e);
   }
 }
+
+// rsvp an event
+Future rsvpEvent(List participants, String documentId) async {
+  final userId = SavedData.getUserId();
+  participants.add(userId);
+  try {
+    await databases.updateDocument(
+        databaseId: databaseId,
+        collectionId: "667fd8040032215ca8e2",
+        documentId: documentId,
+        data: {"participants": participants});
+    return true;
+  } catch (e) {
+    // print(e);
+    return false;
+  }
+}

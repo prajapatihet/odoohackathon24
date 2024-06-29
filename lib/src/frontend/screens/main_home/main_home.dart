@@ -1,12 +1,10 @@
 import 'package:appwrite/models.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:odoohackathon24/src/backend/auth.dart';
 import 'package:odoohackathon24/src/backend/database.dart';
 import 'package:odoohackathon24/src/backend/saved_data.dart';
 import 'package:odoohackathon24/src/backend/utils/routes/route_const.dart';
 import 'package:odoohackathon24/src/frontend/common/event_container.dart';
-import 'package:odoohackathon24/src/frontend/screens/home_pages/detailed_event_page.dart';
 
 class MainHome extends StatefulWidget {
   const MainHome({super.key});
@@ -45,11 +43,10 @@ class _MainHomeState extends State<MainHome> {
           actions: [
             IconButton(
               onPressed: () {
-                logoutUser();
-                Navigator.pushReplacementNamed(context, RouteConstant.login);
+                Navigator.pushNamed(context, RouteConstant.profile);
               },
               icon: const Icon(
-                Icons.logout,
+                Icons.account_circle,
                 color: Colors.white,
                 size: 34,
               ),
@@ -72,13 +69,28 @@ class _MainHomeState extends State<MainHome> {
                         fontWeight: FontWeight.w600,
                       ),
                     ),
-                    Text(
-                      "Exlpore event around you",
-                      style: GoogleFonts.montserrat(
-                        fontSize: 18,
-                        color: Colors.white,
-                        fontWeight: FontWeight.w400,
-                      ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Exlpore event around you",
+                          style: GoogleFonts.montserrat(
+                            fontSize: 18,
+                            color: Colors.white,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                        InkWell(
+                          onTap: () {
+                            refresh();
+                          },
+                          child: const Icon(
+                            Icons.refresh,
+                            size: 28,
+                            color: Colors.white,
+                          ),
+                        )
+                      ],
                     ),
                   ],
                 ),

@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:appwrite/appwrite.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:odoohackathon24/src/backend/auth.dart';
@@ -11,19 +10,30 @@ import 'package:odoohackathon24/src/backend/saved_data.dart';
 import 'package:odoohackathon24/src/frontend/common/custom_form_field.dart';
 import 'package:odoohackathon24/src/frontend/common/custom_header.dart';
 
-class CreateEventPage extends StatefulWidget {
-  const CreateEventPage({super.key});
+class EditEventPage extends StatefulWidget {
+  final String image, name, desc, loc, datetime, guests, sponsers, docID;
+  final bool isInPerson;
+  const EditEventPage(
+      {super.key,
+      required this.image,
+      required this.name,
+      required this.desc,
+      required this.loc,
+      required this.datetime,
+      required this.guests,
+      required this.sponsers,
+      required this.docID,
+      required this.isInPerson});
 
   @override
-  State<CreateEventPage> createState() => _CreateEventPageState();
+  State<EditEventPage> createState() => _EditEventPageState();
 }
 
-class _CreateEventPageState extends State<CreateEventPage>
+class _EditEventPageState extends State<EditEventPage>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
 
   FilePickerResult? _filePickerResult;
-  Uint8List? _webImagePickerResult;
   bool _isInPersonEvent = true;
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _descController = TextEditingController();
@@ -40,6 +50,13 @@ class _CreateEventPageState extends State<CreateEventPage>
     super.initState();
     _controller = AnimationController(vsync: this);
     userId = SavedData.getUserId();
+    _nameController.text = widget.name;
+    _descController.text = widget.desc;
+    _locationController.text = widget.loc;
+    _dateTimeController.text = widget.datetime;
+    _guestController.text = widget.guests;
+    _sponsersController.text = widget.sponsers;
+    _isInPersonEvent = widget.isInPerson;
   }
 
   @override
@@ -75,8 +92,7 @@ class _CreateEventPageState extends State<CreateEventPage>
   }
 
   void _openFilePicker() async {
-    FilePickerResult? result =
-        await FilePicker.platform.pickFiles(type: FileType.image);
+    FilePickerResult? result = await FilePicker.platform.pickFiles();
     setState(() {
       _filePickerResult = result;
     });
@@ -88,7 +104,7 @@ class _CreateEventPageState extends State<CreateEventPage>
       isUploading = true;
     });
     try {
-      if (_filePickerResult != null && _filePickerResult!.files.isNotEmpty) {
+      if (_filePickerResult != null) {
         PlatformFile file = _filePickerResult!.files.first;
         final fileByes = await File(file.path!).readAsBytes();
         final inputFile =
@@ -112,37 +128,6 @@ class _CreateEventPageState extends State<CreateEventPage>
     }
   }
 
-//  image picker for web platform
-//   void pickImageForWeb() async {
-//     Uint8List? bytesFromPicker = await ImagePickerWeb.getImageAsBytes();
-//     if (bytesFromPicker != null) {
-//       setState(() {
-//         _webImagePickerResult = bytesFromPicker;
-//       });
-//     }
-//   }
-  // upload image for web platform
-
-  // Future uploadImageWeb() async {
-  //   try {
-  //     if (_webImagePickerResult != null) {
-  //       final inputFile = InputFile.fromBytes(
-  //           bytes: _webImagePickerResult!, filename: "event_image.jpg");
-
-  //       final response = await storage.createFile(
-  //           bucketId: '64bcdd3ad336eaa231f0',
-  //           fileId: ID.unique(),
-  //           file: inputFile);
-  //       // print(response.$id);
-  //       return response.$id;
-  //     } else {
-  //       // print("Something went wrong");
-  //     }
-  //   } catch (e) {
-  //     // print(e);
-  //   }
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -152,62 +137,35 @@ class _CreateEventPageState extends State<CreateEventPage>
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             const SizedBox(
-              height: 20,
+              height: 50,
             ),
-            const CustomHeadText(text: "Create Event"),
+            const CustomHeadText(text: "Edit Event"),
             const SizedBox(
               height: 25,
             ),
             GestureDetector(
-              onTap: () {
-                if (kIsWeb) {
-                  // pickImageForWeb();
-                } else {
-                  _openFilePicker();
-                }
-              },
+              onTap: () => _openFilePicker(),
               child: Container(
-                width: double.infinity,
-                height: MediaQuery.of(context).size.height * .3,
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(8)),
-                child: _filePickerResult != null
-                    ? ClipRRect(
-                        borderRadius: BorderRadius.circular(8),
-                        child: Image(
-                          image: FileImage(
-                              File(_filePickerResult!.files.first.path!)),
-                          fit: BoxFit.fill,
-                        ),
-                      )
-                    : _webImagePickerResult != null
-                        ? ClipRRect(
-                            borderRadius: BorderRadius.circular(8),
-                            child: Image.memory(
-                              _webImagePickerResult!,
-                              fit: BoxFit.fill,
-                            ),
-                          )
-                        : const Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                                Icon(
-                                  Icons.add_a_photo_outlined,
-                                  size: 42,
-                                  color: Colors.black,
-                                ),
-                                SizedBox(
-                                  height: 8,
-                                ),
-                                Text(
-                                  "Add Event Image",
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.w600),
-                                )
-                              ]),
-              ),
+                  width: double.infinity,
+                  height: MediaQuery.of(context).size.height * .3,
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(8)),
+                  child: _filePickerResult != null
+                      ? ClipRRect(
+                          borderRadius: BorderRadius.circular(8),
+                          child: Image(
+                            image: FileImage(
+                                File(_filePickerResult!.files.first.path!)),
+                            fit: BoxFit.fill,
+                          ),
+                        )
+                      : ClipRRect(
+                          borderRadius: BorderRadius.circular(8),
+                          child: Image.network(
+                            "https://cloud.appwrite.io/v1/storage/buckets/667fdaca002096955b71/files/${widget.image}/view?project=667f8285001ac7028d7e",
+                            fit: BoxFit.fill,
+                          ))),
             ),
             const SizedBox(
               height: 8,
@@ -266,9 +224,12 @@ class _CreateEventPageState extends State<CreateEventPage>
             ),
             Row(
               children: [
-                const Text(
+                Text(
                   "In Person Event",
-                  style: TextStyle(color: Colors.white, fontSize: 20),
+                  style: GoogleFonts.montserrat(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600),
                 ),
                 const Spacer(),
                 Switch(
@@ -299,52 +260,119 @@ class _CreateEventPageState extends State<CreateEventPage>
                         content: Text(
                             "Event Name,Description,Location,Date & time are must.")));
                   } else {
-                    if (kIsWeb) {
-                      // uploadImageWeb()
-                      //     .then((value) => createEvent(
-                      //         _nameController.text,
-                      //         _descController.text,
-                      //         value,
-                      //         _locationController.text,
-                      //         _dateTimeController.text,
-                      //         userId,
-                      //         _isInPersonEvent,
-                      //         _guestController.text,
-                      //         _sponsersController.text))
-                      //     .then((value) {
-                      //   ScaffoldMessenger.of(context).showSnackBar(
-                      //       const SnackBar(content: Text("Event Created !!")));
-                      //   Navigator.pop(context);
-                      // });
-                    } else {
-                      uploadEventImage()
-                          .then((value) => createEvent(
+                    if (_filePickerResult == null) {
+                      updateEvent(
                               _nameController.text,
                               _descController.text,
-                              value ?? "66629e1a0000e9198561",
+                              widget.image,
                               _locationController.text,
                               _dateTimeController.text,
                               userId,
                               _isInPersonEvent,
                               _guestController.text,
-                              _sponsersController.text))
+                              _sponsersController.text,
+                              widget.docID)
                           .then((value) {
                         ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text("Event Created !!")));
+                            const SnackBar(content: Text("Event Updated !!")));
+                        Navigator.pop(context);
+                      });
+                    } else {
+                      uploadEventImage()
+                          .then((value) => updateEvent(
+                              _nameController.text,
+                              _descController.text,
+                              value,
+                              _locationController.text,
+                              _dateTimeController.text,
+                              userId,
+                              _isInPersonEvent,
+                              _guestController.text,
+                              _sponsersController.text,
+                              widget.docID))
+                          .then((value) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(content: Text("Event Updated !!")));
                         Navigator.pop(context);
                       });
                     }
                   }
                 },
                 child: Text(
-                  "Create New Event",
+                  "Update Event",
                   style: GoogleFonts.montserrat(
                       color: Colors.black,
                       fontWeight: FontWeight.w900,
                       fontSize: 20),
                 ),
               ),
-            )
+            ),
+            const SizedBox(
+              height: 12,
+            ),
+            Text(
+              "Danger Zone",
+              style: GoogleFonts.montserrat(
+                  color: const Color.fromARGB(255, 243, 138, 136),
+                  fontWeight: FontWeight.w600,
+                  fontSize: 20),
+            ),
+            const SizedBox(
+              height: 8,
+            ),
+            SizedBox(
+              height: 50,
+              width: double.infinity,
+              child: MaterialButton(
+                color: const Color.fromARGB(255, 243, 138, 136),
+                onPressed: () {
+                  showDialog(
+                      context: context,
+                      builder: (context) => AlertDialog(
+                            title: Text(
+                              "Are you Sure ?",
+                              style:
+                                  GoogleFonts.montserrat(color: Colors.white),
+                            ),
+                            content: Text(
+                              "Your event will be deleted",
+                              style:
+                                  GoogleFonts.montserrat(color: Colors.white),
+                            ),
+                            actions: [
+                              TextButton(
+                                  onPressed: () {
+                                    deleteEvent(widget.docID)
+                                        .then((value) async {
+                                      await storage.deleteFile(
+                                          bucketId: "64bcdd3ad336eaa231f0",
+                                          fileId: widget.image);
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(const SnackBar(
+                                              content: Text(
+                                                  "Event Deleted Successfully. ")));
+                                      Navigator.pop(context);
+                                      Navigator.pop(context);
+                                    });
+                                  },
+                                  child: const Text("Yes")),
+                              TextButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: const Text("No")),
+                            ],
+                          ));
+                },
+                child: Text(
+                  "Delete Event",
+                  style: GoogleFonts.montserrat(
+                      color: Colors.black,
+                      fontWeight: FontWeight.w900,
+                      fontSize: 20),
+                ),
+              ),
+            ),
           ]),
         ),
       ),

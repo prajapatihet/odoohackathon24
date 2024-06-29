@@ -40,7 +40,7 @@ class SavedData {
   // Save user is organized or not
   static Future<void> saveUserIsOrganized(bool isOrganized) async {
     await preferences!.setBool("isOrganized", isOrganized);
-    print("saved isOrganized : $isOrganized");
+    // print("saved isOrganized : $isOrganized");
   }
 
   // Get the user is organized or not
@@ -51,6 +51,6 @@ class SavedData {
   // clear the saved data
   static Future<void> clearSavedData() async {
     await preferences!.clear();
-    print("saved data cleared");
+    // print("saved data cleared");
   }
 }

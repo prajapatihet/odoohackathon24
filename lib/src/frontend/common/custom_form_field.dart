@@ -35,7 +35,7 @@ class CustomInputForm extends StatelessWidget {
       cursorColor: Colors.white,
       decoration: InputDecoration(
         filled: true,
-        fillColor: Color(0xff7f00ff),
+        fillColor: const Color.fromARGB(255, 157, 60, 255),
         border: OutlineInputBorder(
           borderSide: BorderSide.none,
           borderRadius: BorderRadius.circular(8),

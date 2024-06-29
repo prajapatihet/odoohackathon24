@@ -34,6 +34,7 @@ Future loginUser(String email, String password) async {
     getUserData();
     return true;
   } on AppwriteException catch (e) {
+    // print(e);
     return false;
   }
 }

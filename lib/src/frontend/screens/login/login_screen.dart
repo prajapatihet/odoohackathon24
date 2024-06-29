@@ -85,7 +85,7 @@ class LoginScreen extends StatelessWidget {
                               seconds: 2,
                             ),
                             () => {
-                                  Navigator.pushNamed(
+                                  Navigator.pushReplacementNamed(
                                       context, RouteConstant.mainHome)
                                 });
                       } else {

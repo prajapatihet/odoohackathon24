@@ -38,6 +38,17 @@ An **Event Orchestrator** application is designed to manage and coordinate vario
 - Coordinate with vendors (e.g., catering, audio-visual) and track vendor contracts.
 - Inventory management for event supplies and materials.
 
+### Screenshots
+
+<img src='login.jpg' width='200'/> 
+<img src='register.jpg' width='200'/> 
+<img src='home_screen.jpg' width='200'/> 
+<img src='free_event.jpg' width='200'/>
+<img src='paid_event.jpg' width='200'/> 
+<img src='create_event.jpg' width='200'/>
+
+**Note:** If you encounter any issues or have suggestions for improvement, please feel free to [create an issue](https://github.com/VaibhavCodeClub/learn/issues/new/choose) on our GitHub repository. We appreciate your feedback!
+
 ## Tech Stack
 
 - **Frontend:** Flutter, Dart

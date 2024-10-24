@@ -2,6 +2,8 @@ import 'package:appwrite/models.dart';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:odoohackathon24/src/backend/utils/navi_anim/page_transition.dart';
+import 'package:odoohackathon24/src/frontend/common/colors.dart';
 import 'package:odoohackathon24/src/frontend/common/datetime_format.dart';
 import 'package:odoohackathon24/src/frontend/screens/home_pages/detailed_event_page.dart';
 
@@ -12,10 +14,10 @@ class EventContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Navigator.push(context,
-          MaterialPageRoute(builder: (context) => EventDetails(data: data))),
+      onTap: () =>
+          Navigator.push(context, slidePageRoute(EventDetails(data: data))),
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(10.0),
         child: Stack(
           children: [
             Container(
@@ -27,17 +29,17 @@ class EventContainer extends StatelessWidget {
                 borderRadius: BorderRadius.circular(8),
                 boxShadow: const [
                   BoxShadow(
-                    color: Color.fromARGB(255, 218, 255, 123),
+                    color: Color.fromARGB(255, 204, 210, 252),
                     blurRadius: 0,
                     offset: Offset(5, 5),
                   ),
                 ],
               ),
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(8),
+                borderRadius: BorderRadius.circular(10),
                 child: ColorFiltered(
-                  colorFilter: ColorFilter.mode(
-                    Colors.black.withOpacity(0.5),
+                  colorFilter: const ColorFilter.mode(
+                    black0_5,
                     BlendMode.darken,
                   ),
                   child: Image.network(
@@ -56,7 +58,7 @@ class EventContainer extends StatelessWidget {
                   data.data["name"],
                   overflow: TextOverflow.ellipsis,
                   style: GoogleFonts.montserrat(
-                    color: Colors.white,
+                    color: white,
                     fontSize: 24,
                     fontWeight: FontWeight.w800,
                   ),
@@ -73,7 +75,7 @@ class EventContainer extends StatelessWidget {
                   Text(
                     formatDate(data.data["datetime"]),
                     style: GoogleFonts.montserrat(
-                      color: Colors.white,
+                      color: white,
                       fontSize: 14,
                       fontWeight: FontWeight.w500,
                     ),
@@ -84,7 +86,7 @@ class EventContainer extends StatelessWidget {
                   Text(
                     formatTime(data.data["datetime"]),
                     style: GoogleFonts.montserrat(
-                      color: Colors.white,
+                      color: white,
                       fontSize: 14,
                       fontWeight: FontWeight.w500,
                     ),
@@ -93,22 +95,23 @@ class EventContainer extends StatelessWidget {
               ),
             ),
             Positioned(
-                bottom: 20,
-                left: 16,
-                child: Row(
-                  children: [
-                    const Icon(Icons.location_on_outlined, size: 18),
-                    const SizedBox(width: 4),
-                    Text(
-                      data.data["location"],
-                      style: GoogleFonts.montserrat(
-                        color: Colors.white,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
-                      ),
+              bottom: 20,
+              left: 16,
+              child: Row(
+                children: [
+                  const Icon(Icons.location_on_outlined, size: 18),
+                  const SizedBox(width: 4),
+                  Text(
+                    data.data["location"],
+                    style: GoogleFonts.montserrat(
+                      color: white,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
                     ),
-                  ],
-                ))
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),

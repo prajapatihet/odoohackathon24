@@ -13,11 +13,13 @@ class PopularItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       onTap: () => Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => EventDetails(
-                    data: eventData,
-                  ))),
+        context,
+        MaterialPageRoute(
+          builder: (context) => EventDetails(
+            data: eventData,
+          ),
+        ),
+      ),
       minLeadingWidth: 0,
       minVerticalPadding: 10,
       contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),

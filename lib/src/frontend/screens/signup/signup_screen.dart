@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:odoohackathon24/src/backend/auth.dart';
 import 'package:odoohackathon24/src/backend/utils/routes/route_const.dart';
+import 'package:odoohackathon24/src/frontend/common/colors.dart';
 import 'package:odoohackathon24/src/frontend/common/custom_form_field.dart';
 
 class SignupScreen extends StatelessWidget {
@@ -18,19 +19,19 @@ class SignupScreen extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         body: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(10.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(
-                height: height * 0.01,
+                height: height * 0.05,
               ),
               Text(
-                "Sign Up",
+                "Sign-Up",
                 style: GoogleFonts.montserrat(
                   fontSize: 30,
-                  color: Colors.white,
-                  fontWeight: FontWeight.w700,
+                  color: white,
+                  fontWeight: FontWeight.w800,
                 ),
               ),
               SizedBox(
@@ -43,7 +44,7 @@ class SignupScreen extends StatelessWidget {
                 hint: "Enter Your Name",
               ),
               SizedBox(
-                height: height * 0.02,
+                height: height * 0.025,
               ),
               CustomInputForm(
                 controller: _emailController,
@@ -52,7 +53,7 @@ class SignupScreen extends StatelessWidget {
                 hint: "Enter Your Email",
               ),
               SizedBox(
-                height: height * 0.02,
+                height: height * 0.025,
               ),
               CustomInputForm(
                 controller: _passwordController,
@@ -91,7 +92,8 @@ class SignupScreen extends StatelessWidget {
                     });
                   },
                   style: OutlinedButton.styleFrom(
-                    foregroundColor: Colors.white,
+                    foregroundColor: white,
+                    backgroundColor: blueButton,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
@@ -99,9 +101,9 @@ class SignupScreen extends StatelessWidget {
                   child: Text(
                     "Sign-Up",
                     style: GoogleFonts.montserrat(
-                      fontSize: 19,
-                      color: Colors.white,
-                      fontWeight: FontWeight.w500,
+                      fontSize: 21,
+                      color: white,
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
                 ),
@@ -117,10 +119,10 @@ class SignupScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      "Already have an Account ?",
+                      "Already have an Account?",
                       style: GoogleFonts.montserrat(
                         fontSize: 18,
-                        color: Colors.white,
+                        color: white,
                         fontWeight: FontWeight.w300,
                       ),
                     ),
@@ -131,7 +133,7 @@ class SignupScreen extends StatelessWidget {
                       "Log in",
                       style: GoogleFonts.montserrat(
                         fontSize: 18,
-                        color: Colors.blue,
+                        color: blue,
                         fontWeight: FontWeight.w600,
                       ),
                     ),

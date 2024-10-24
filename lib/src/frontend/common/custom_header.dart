@@ -17,7 +17,7 @@ class _CustomHeadTextState extends State<CustomHeadText> {
       style: GoogleFonts.montserrat(
         color: Colors.white,
         fontSize: 32,
-        fontWeight: FontWeight.w600,
+        fontWeight: FontWeight.w700,
       ),
     );
   }

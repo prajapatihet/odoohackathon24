@@ -54,23 +54,21 @@ class _ManageEventsState extends State<ManageEvents> {
             trailing: IconButton(
               onPressed: () async {
                 await Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => EditEventPage(
-                              image: userCreatedEvents[index].data["image"],
-                              name: userCreatedEvents[index].data["name"],
-                              desc:
-                                  userCreatedEvents[index].data["description"],
-                              loc: userCreatedEvents[index].data["location"],
-                              datetime:
-                                  userCreatedEvents[index].data["datetime"],
-                              guests: userCreatedEvents[index].data["guests"],
-                              sponsers:
-                                  userCreatedEvents[index].data["sponsers"],
-                              isInPerson:
-                                  userCreatedEvents[index].data["isInPerson"],
-                              docID: userCreatedEvents[index].$id,
-                            )));
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => EditEventPage(
+                      image: userCreatedEvents[index].data["image"],
+                      name: userCreatedEvents[index].data["name"],
+                      desc: userCreatedEvents[index].data["description"],
+                      loc: userCreatedEvents[index].data["location"],
+                      datetime: userCreatedEvents[index].data["datetime"],
+                      guests: userCreatedEvents[index].data["guests"],
+                      sponsers: userCreatedEvents[index].data["sponsers"],
+                      isInPerson: userCreatedEvents[index].data["isInPerson"],
+                      docID: userCreatedEvents[index].$id,
+                    ),
+                  ),
+                );
                 refresh();
               },
               icon: const Icon(

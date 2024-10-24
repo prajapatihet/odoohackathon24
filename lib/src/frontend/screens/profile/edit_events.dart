@@ -345,8 +345,9 @@ class _EditEventPageState extends State<EditEventPage>
                                     deleteEvent(widget.docID)
                                         .then((value) async {
                                       await storage.deleteFile(
-                                          bucketId: "64bcdd3ad336eaa231f0",
-                                          fileId: widget.image);
+                                        bucketId: "64bcdd3ad336eaa231f0",
+                                        fileId: widget.image,
+                                      );
                                       ScaffoldMessenger.of(context)
                                           .showSnackBar(const SnackBar(
                                               content: Text(

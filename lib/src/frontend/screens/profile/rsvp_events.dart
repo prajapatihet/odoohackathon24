@@ -49,10 +49,13 @@ class _RSVPEventsState extends State<RSVPEvents> {
         itemBuilder: (context, index) => Card(
           child: ListTile(
             onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) =>
-                        EventDetails(data: userEvents[index]))),
+              context,
+              MaterialPageRoute(
+                builder: (context) => EventDetails(
+                  data: userEvents[index],
+                ),
+              ),
+            ),
             title: Text(
               userEvents[index].data["name"],
               style: GoogleFonts.montserrat(color: Colors.white),

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:odoohackathon24/src/frontend/common/colors.dart';
 
 class CustomInputForm extends StatelessWidget {
   final TextEditingController? controller;
@@ -28,30 +30,29 @@ class CustomInputForm extends StatelessWidget {
       controller: controller,
       readOnly: readOnly ?? false,
       onTap: onTap,
-      style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w900),
+      style: GoogleFonts.montserrat(color: black, fontWeight: FontWeight.w700),
       maxLines: maxLines ?? 1,
       obscureText: obscureText ?? false,
       keyboardType: keyboardType ?? TextInputType.text,
-      cursorColor: Colors.white,
+      cursorColor: black,
       decoration: InputDecoration(
         filled: true,
-        fillColor: const Color.fromARGB(255, 157, 60, 255),
+        fillColor: white,
         border: OutlineInputBorder(
           borderSide: BorderSide.none,
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(10),
         ),
-        labelText: label,
-        labelStyle: const TextStyle(
-          color: Colors.white,
-          fontWeight: FontWeight.w600,
+        hintText: label,
+        hintStyle: GoogleFonts.montserrat(
+          color: grey,
         ),
-        hintText: hint,
-        hintStyle: const TextStyle(
-          color: Colors.white,
+        labelText: hint,
+        labelStyle: GoogleFonts.montserrat(
+          color: grey,
         ),
         prefixIcon: Icon(
           icon,
-          color: Colors.black,
+          color: black,
         ),
         floatingLabelBehavior: FloatingLabelBehavior.never,
       ),

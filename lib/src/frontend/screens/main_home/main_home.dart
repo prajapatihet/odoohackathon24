@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:odoohackathon24/src/backend/database.dart';
 import 'package:odoohackathon24/src/backend/saved_data.dart';
 import 'package:odoohackathon24/src/backend/utils/routes/route_const.dart';
+import 'package:odoohackathon24/src/frontend/common/colors.dart';
 import 'package:odoohackathon24/src/frontend/common/event_container.dart';
 
 class MainHome extends StatefulWidget {
@@ -47,7 +48,7 @@ class _MainHomeState extends State<MainHome> {
               },
               icon: const Icon(
                 Icons.account_circle,
-                color: Colors.white,
+                color: white,
                 size: 34,
               ),
             ),
@@ -62,21 +63,22 @@ class _MainHomeState extends State<MainHome> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Hello $userName!!",
+                      "Welcome $userName!!",
                       style: GoogleFonts.montserrat(
                         fontSize: 28,
-                        color: Colors.white,
-                        fontWeight: FontWeight.w600,
+                        color: white,
+                        letterSpacing: 1.5,
+                        fontWeight: FontWeight.w700,
                       ),
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          "Exlpore event around you",
+                          "Explore event around you",
                           style: GoogleFonts.montserrat(
                             fontSize: 18,
-                            color: Colors.white,
+                            color: white,
                             fontWeight: FontWeight.w400,
                           ),
                         ),
@@ -86,10 +88,10 @@ class _MainHomeState extends State<MainHome> {
                           },
                           child: const Icon(
                             Icons.refresh,
-                            size: 28,
-                            color: Colors.white,
+                            size: 32,
+                            color: white,
                           ),
-                        )
+                        ),
                       ],
                     ),
                   ],
@@ -111,10 +113,10 @@ class _MainHomeState extends State<MainHome> {
             await Navigator.pushNamed(context, RouteConstant.createEvent);
             refresh();
           },
-          backgroundColor: const Color(0xff7f00ff),
+          backgroundColor: blue,
           child: const Icon(
             Icons.add,
-            color: Colors.white,
+            color: white,
           ),
         ));
   }

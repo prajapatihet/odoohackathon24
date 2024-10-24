@@ -78,9 +78,29 @@ class _ProfileState extends State<Profile> {
                       "Manage Events",
                       style: GoogleFonts.montserrat(color: Colors.white),
                     ),
-                  )
+                  ),
                   // : Container(),
-                  ,
+                  ListTile(
+                    onTap: () {},
+                    title: Text(
+                      "Venue Booking",
+                      style: GoogleFonts.montserrat(color: Colors.white),
+                    ),
+                  ),
+                  ListTile(
+                    onTap: () {},
+                    title: Text(
+                      "Assign Vendor",
+                      style: GoogleFonts.montserrat(color: Colors.white),
+                    ),
+                  ),
+                  ListTile(
+                    onTap: () {},
+                    title: Text(
+                      "Arrange Inventory",
+                      style: GoogleFonts.montserrat(color: Colors.white),
+                    ),
+                  ),
                   ListTile(
                     onTap: () {
                       logoutUser();

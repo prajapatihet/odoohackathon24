@@ -1,16 +1,81 @@
-# odoohackathon24
+# Event Orchestrator
 
-A new Flutter project.
+An **Event Orchestrator** application is designed to manage and coordinate various aspects of organizing events, ensuring smooth execution from planning to post-event activities. This application is built using Flutter and Dart, with AppWrite for backend services and Stripe for payment processing.
+
+## Features
+
+### General Features
+
+#### 1. Event Creation and Management
+
+- Create new events with details such as name, date, time, location, description, and categories.
+- Edit and update event information as needed.
+- Set event status (e.g., draft, published, canceled).
+
+#### 2. Participant Management
+
+- Allow participants to register online.
+- Manage attendee lists, registrations, and check-in status.
+- Generate attendee badges and QR codes.
+
+#### 3. Ticketing and Payments
+
+- Online ticket sales with multiple ticket types (e.g., general admission, VIP).
+- Integration with Stripe for secure transactions.
+- Manage refunds, discounts, and promotional codes.
+
+## Future Implementations
+
+### 1. Task and Workflow Management
+
+- Assign tasks to team members or volunteers.
+- Set deadlines, priorities, and task dependencies.
+- Workflow automation for task notifications, reminders, and approvals.
+
+### 2. Venue and Resource Management
+
+- Manage venue bookings, layouts, and seating arrangements.
+- Coordinate with vendors (e.g., catering, audio-visual) and track vendor contracts.
+- Inventory management for event supplies and materials.
+
+## Tech Stack
+
+- **Frontend:** Flutter, Dart
+- **Backend:** AppWrite
+- **Payments:** Stripe
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+### Prerequisites
 
-A few resources to get you started if this is your first Flutter project:
+- [Flutter](https://flutter.dev/docs/get-started/install) (latest stable version)
+- [Dart](https://dart.dev/get-dart) (comes with Flutter)
+- [AppWrite](https://appwrite.io/docs/installation) (self-hosted or cloud)
+- [Stripe](https://stripe.com/docs) account for payment processing
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+### Installation
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/event-orchestrator.git
+   ```
+2. Navigate to the project directory:
+   ```bash
+   cd odoohackathon24
+   ```
+3. Install dependencies:
+   ```bash
+   flutter pub get
+   ```
+4. Set up your environment variables (create a .env file):
+   ```bash
+   STRIPE_PUBLISH_KEY=<your_publish_key>
+   STRIPE_SECRET_KEY=<your_publish_key>
+   ```
+
+### Running the Application
+
+- Start the application:
+  ```bash
+  flutter run
+  ```
